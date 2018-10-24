@@ -1,3 +1,11 @@
+# This code runs in CircuitPython on the Adafruit Feather Huzzah ESP8266.
+# It has been written to add "Internet Of Things" functionality to a Fisher-Price See 'n Say The Farmer Says toy.
+# In short, it connects to the adafruit.io service and waits for one of twelve buttons to be pressed on 
+# the original  See 'n Say control board.  When a button closure is sensed, software reports the respective animal
+# to a public feed, then spins the motor and has the control board play the appropriate sound.  When no button is sensed, 
+# software periodically checks a different public feed to see if a new update is available.  If so, it again instructs the 
+# motor to spin and the correct sound to play.
+
 import network
 from umqtt.simple import MQTTClient
 import os
@@ -66,7 +74,7 @@ def cb(topic, msg):
     try:
         index = animals2.index("".join(map(chr, msg)))
 #        print(index)
-        reset.value = False
+        reset.value = False           # See more comments regarding this section below
         animals1[index].switch_to_output(value=True)
         mot.value = True
         time.sleep(0.2)
@@ -104,8 +112,8 @@ animals1 = [Sheep, Turkey, Cat, Bird, Cow, Pig,
 animals2 = ["Sheep", "Turkey", "Cat", "Bird", "Cow", "Pig",
             "Rooster", "Coyote", "Horse", "Frog", "Duck", "Dog"]
 
-reset.switch_to_output(value=True)
-mot.switch_to_output(value=False)
+reset.switch_to_output(value=True)            # Normally hold the sound PCB in reset
+mot.switch_to_output(value=False)             # And make sure the motor is off
 
 Check_subscription_period_in_seconds = 2
 Loop_time = 0.1
@@ -114,19 +122,19 @@ accum_time = 0
 # if True:
 while True:
     for x in range (0, 12):
-        if animals1[x].value == True:
-            while animals1[x].value == True:
+        if animals1[x].value == True:         # If a button is pressed
+            while animals1[x].value == True:  # Wait for it to be released
                 pass
 #            print('Button: {0}'.format(animals1[x].value))
             client.publish(mqtt_outgoing_feedname, bytes(str(animals2[x]), 'utf-8'), qos=0)
-            reset.value = False
-            animals1[x].switch_to_output(value=True)
-            mot.value = True
-            time.sleep(0.2)
-            animals1[x].switch_to_input()
-            time.sleep(5)
-            reset.value = True
-            mot.value = False
+            reset.value = False               # Disable the reset pin on the PCB so it will speak
+            animals1[x].switch_to_output(value=True)  # "Press" the button again to trigger the sound board
+            mot.value = True                  # Turn on the motor
+            time.sleep(0.2)                   # Wait 200ms
+            animals1[x].switch_to_input()     # "Release" the button
+            time.sleep(5)                     # Spin the motor for 5 seconds
+            reset.value = True                # Hold the PCB in reset again
+            mot.value = False                 # And turn off the motor
 
     time.sleep (Loop_time)
     accum_time += Loop_time

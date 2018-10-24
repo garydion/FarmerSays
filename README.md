@@ -2,17 +2,20 @@
 
 # The Other End
 
+Be sure to see the "entagled" page here for more supporting information of the twin unit:
 https://github.com/topherCantrell/FarmerSays
 
 # The Farmer Says
 
-First order of business was removing some of the mechanical hardware in the toy and installing a motor to spin the dial electrically.
+The first order of business I attacked was removing some of the mechanical hardware in the toy and installing a motor to spin the dial electrically.
 ![](https://github.com/garydion/FarmerSays/blob/master/art/IMG_0860.JPG)
-Then I removed the control board and drilled a small hole to bring sense/control wires out the back.
+Then I removed the control board and drilled small holes in order to bring sense/control wires out the back.
 ![](https://github.com/garydion/FarmerSays/blob/master/art/IMG_0862.JPG)
-Here I'm showing how I mounted the Adafruit Feather HUZZAH with ESP8266 board at the edge of the case so I could plug in the USB mini connector for programming/charging.
+Here I'm showing how I mounted the Adafruit Feather HUZZAH with ESP8266 board at the edge of the case so I could plug in the USB mini connector for programming/charging.  This is the board I purchased:
+https://www.adafruit.com/product/2821
 ![](https://github.com/garydion/FarmerSays/blob/master/art/IMG_0872.JPG)
-The wires I soldered onto the board are shown here connected to a socket which holds an MCP23017.
+The wires I soldered onto the board are shown here connected to a socket which holds an MCP23017.  You can get one here:
+https://www.adafruit.com/product/732
 ![](https://github.com/garydion/FarmerSays/blob/master/art/IMG_0876.JPG)
 Just another picture showing how I needed to bend the pins on the chip a little, as space was tight.
 ![](https://github.com/garydion/FarmerSays/blob/master/art/IMG_0877.JPG)

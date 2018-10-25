@@ -7,7 +7,7 @@ https://github.com/topherCantrell/FarmerSays
 
 # The Farmer Says
 
-The first order of business I attacked was removing some of the mechanical hardware in the toy and installing a motor to spin the dial electrically.
+The first order of business was removing some of the mechanical hardware in the toy and installing a motor to spin the dial electrically.
 ![](https://github.com/garydion/FarmerSays/blob/master/art/IMG_0860.JPG)
 Then I removed the control board and drilled small holes in order to bring sense/control wires out the back.
 ![](https://github.com/garydion/FarmerSays/blob/master/art/IMG_0862.JPG)
